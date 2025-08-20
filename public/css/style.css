@@ -1,0 +1,9 @@
+html, body {
+    padding: 20px;
+    background-color: darkslategrey;
+}
+
+h1 {
+    font-size: 3rem;
+    color: aquamarine;
+}

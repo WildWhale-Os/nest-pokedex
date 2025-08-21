@@ -24,6 +24,13 @@ docker compose up -d
 
 ```
 
+5. Reconstruir base de datos de desarrollo con semilla
+
+```bash
+http://localhost:300/api/v2/seed
+
+```
+
 ## Stack usado
 
 - Nest

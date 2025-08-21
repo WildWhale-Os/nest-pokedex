@@ -10,6 +10,7 @@ import { isValidObjectId, Model } from 'mongoose';
 import { Pokemon } from './entities/pokemon.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { MongoServerError } from 'mongodb';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Injectable()
 export class PokemonService {
@@ -28,8 +29,9 @@ export class PokemonService {
     }
   }
 
-  findAll() {
-    return `This action returns all pokemon`;
+  findAll(paginationDto: PaginationDto) {
+    const { limit = 10, offset = 0 } = paginationDto;
+    return this.pokemonModel.find().skip(offset).limit(limit).sort({ no: 1 });
   }
 
   async findOne(id: string) {
@@ -85,5 +87,18 @@ export class PokemonService {
       }
     }
     throw new InternalServerErrorException();
+  }
+
+  async bulkInsert(pokemons: CreatePokemonDto[]) {
+    if (!pokemons || pokemons.length === 0) {
+      throw new ConflictException('No pokemons to insert');
+    }
+
+    try {
+      await this.pokemonModel.insertMany(pokemons);
+      return { message: 'Pokemons inserted successfully' };
+    } catch (error) {
+      this.handleExceptions(error);
+    }
   }
 }

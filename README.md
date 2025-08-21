@@ -7,7 +7,7 @@
 1. Clonar Repo
 1. Ejecutar
 
-```{bash}
+```bash
 yarn install
 ```
 
@@ -24,7 +24,14 @@ docker compose up -d
 
 ```
 
-5. Reconstruir base de datos de desarrollo con semilla
+5. Clonar el archivo **.env.template** y renombrar a **.env**
+6. Ejecutar aplicacion en modo dev
+
+```bash
+yarn start:dev
+```
+
+7. Reconstruir base de datos de desarrollo con semilla
 
 ```bash
 http://localhost:300/api/v2/seed
